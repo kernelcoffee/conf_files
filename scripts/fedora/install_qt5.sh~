@@ -1,7 +1,0 @@
-#!/bin/sh
-
-cd ~/Documents/git_repo/
-git clone git://gitorious.org/qt/qt5.git
-cd qt5
-perl init-repository
-./configure -confirm-license -developer-build -opensource -nomake examples -nomake tests -no-dbus -no-gtkstyle && make -j 8 && make install

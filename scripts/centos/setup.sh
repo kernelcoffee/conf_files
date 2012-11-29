@@ -33,8 +33,14 @@ rpm -i $EPELPKG
 wget $REMIADDR$REMIPKG
 rpm -i $REMIPKG
 
-yum -y install curl htop
+yum -y install curl htop screen java-1.7.0-openjdk
 
 #adduser $USERNAME
 #passwd $PASSWD
 #usermod -G wheel $USERNAME
+
+mkdir -p /home/shared/downloads/inprogress
+mkdir -p /home/shared/backup
+mkdir -p /home/shared/share/movies
+mkdir -p /home/shared/share/series
+mkdir -p /home/shared/share/music

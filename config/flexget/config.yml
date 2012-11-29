@@ -1,0 +1,56 @@
+presets:
+  tv:
+    exists_series: "/home/shared/share/series/"
+    series:
+      settings:
+        720p:
+          timeframe: 6 hours
+          quality: 720p
+          upgrade: yes
+          set:
+            path: "/home/shared/share/series/%(series_name)s/Season %(series_season)s/"
+      720p:
+        - House
+        - How I Met Your Mother
+        - The Big Bang Theory
+        - Downton Abbey
+        - Game of Thrones
+        - Lie to Me
+        - Star Trek
+        - Leverage
+        - Stargate
+        - Fringe
+        - Castle
+        - NCIS
+        - 'CSI: Miami'
+        - 'CSI: New York'
+        - Dexter
+        - South Park
+        - 'CSI'
+        - Supernatural
+        - Bones
+        - Person of Interest
+        - Top Gear
+        - "Sherlock"
+
+    transmission:
+      host: localhost
+      port: 9091
+      username:
+      password:
+      path: "/home/shared/share/series/%(series_name)s/Season %(series_season)s/"
+
+    email:
+      active: True
+      from: seedbox@kernelcoffee.org
+      to: alexandre@kernelcoffee.org
+      smtp_host: localhost
+      smtp_port: 25
+      smtp_login: False
+
+feeds:
+  EZRSS:
+    rss: http://www.ezrss.it/feed/
+    preset: tv
+  EZRSS2:
+    rss: http://feeds.feedburner.com/eztv-rss-atom-feeds?format=xml

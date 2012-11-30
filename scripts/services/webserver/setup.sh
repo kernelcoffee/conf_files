@@ -2,7 +2,7 @@
 
 MYSQLPWD=''
 
-yum install -y g++ make wget openssl openssl-devel zlib zlib-devel libcurl-devel
+yum install -y g++ make wget openssl openssl-devel zlib zlib-devel libcurl-devel mysql-devel postgresql-devel
 
 #install rvm
 curl -L https://get.rvm.io | bash -s stable --ruby

@@ -30,7 +30,7 @@ fi
 prog=nginx
 nginx=${NGINX-/opt/nginx/sbin/nginx}
 conffile=${CONFFILE-/opt/nginx/conf/nginx.conf}
-lockfile=${LOCKFILE-/opt/nginx/nginx/logs/nginx}
+lockfile=${LOCKFILE-/opt/nginx/logs/nginx}
 pidfile=${PIDFILE-/opt/nginx/logs/nginx.pid}
 SLEEPMSEC=100000
 RETVAL=0

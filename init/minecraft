@@ -20,7 +20,7 @@ OPTIONS='nogui'
 USERNAME='minecraft'
 WORLD='world'
 MCPATH='/home/minecraft/minecraft'
-BACKUPPATH='/home/shared/backup/minecrat'
+BACKUPPATH='/home/shared/backup/minecraft'
 CPU_COUNT=4
 INVOCATION="java -Xmx1024M -Xms1024M -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalPacing -XX:ParallelGCThreads=$CPU_COUNT -XX:+AggressiveOpts -jar $SERVICE $OPTIONS"
 ME=`whoami`

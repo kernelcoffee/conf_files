@@ -1,14 +1,15 @@
 #!/bin/sh
 
+#create user minecraft
 adduser minecraft
 
+#install minecraft server as minecraft user
 su minecraft -c "
 cd ~;
 mkdir minecraft;
 cd minecraft;
 wget https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft_server.jar
-echo '
-generator-settings=
+echo 'generator-settings=
 allow-nether=true
 level-name=world
 enable-query=false
@@ -43,6 +44,15 @@ echo 'alexor85
 kharzyga' > white-list.txt
 "
 
+#copy the init file and start the server
 cp ../../../init/minecraft /etc/init.d/
 chmod +x /etc/init.d/minecraft
 /etc/init.d/minecraft start
+
+#setup cron for daily backup
+echo '#!/bin/sh
+
+/etc/init.d/minecraft backup
+' > /etc/cron.daily/minecraft
+
+chmod +x /etc/cron.daily/minecraft

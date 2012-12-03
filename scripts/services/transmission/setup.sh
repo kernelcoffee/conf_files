@@ -7,8 +7,9 @@ mkdir -p /home/shared/share/movies
 mkdir -p /home/shared/share/series
 mkdir -p /home/shared/share/music
 
+service transmission-daemon start
+service transmission-daemon stop
 cp ../../../config/transmission/settings.json  /var/lib/transmission/.config/transmission/
-service transmission start
 
 echo '#!/bin/sh
 
@@ -18,3 +19,4 @@ chown nobody:nobody -R /home/shared
 
 chmod +x /etc/cron.hourly/sharedfolder
 
+service transmission-daemon start

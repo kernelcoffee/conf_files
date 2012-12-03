@@ -44,4 +44,4 @@ service mysqld start
 # set your new password
 # remove tables / anonymous user / remote root access and reload privilege
 # done.
-/usr/bin/mysqladmin_secure_installation
+/usr/bin/mysql_secure_installation

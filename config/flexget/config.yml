@@ -32,6 +32,7 @@ presets:
         - Person of Interest
         - Top Gear
         - "Sherlock"
+        - The Following
 
     transmission:
       host: localhost
@@ -42,8 +43,8 @@ presets:
 
     email:
       active: True
-      from: seedbox@kernelcoffee.org
-      to: alexandre@kernelcoffee.org
+      from: 
+      to: 
       smtp_host: localhost
       smtp_port: 25
       smtp_login: False
@@ -54,3 +55,4 @@ feeds:
     preset: tv
   EZRSS2:
     rss: http://feeds.feedburner.com/eztv-rss-atom-feeds?format=xml
+    preset: tv

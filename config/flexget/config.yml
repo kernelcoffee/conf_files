@@ -2,6 +2,7 @@ presets:
   tv:
     if:
       - "'[ www.Speed.Cd ]' in title": reject
+      - "'[ www.Torrenting.com ]' in title": reject
     exists_series: "/home/shared/share/series/"
     series:
       settings:

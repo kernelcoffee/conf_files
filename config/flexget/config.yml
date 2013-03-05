@@ -1,8 +1,5 @@
 presets:
   tv:
-    if:
-      - "'[ www.Speed.Cd ]' in title": reject
-      - "'[ www.Torrenting.com ]' in title": reject
     exists_series: "/home/shared/share/series/"
     series:
       settings:
@@ -25,8 +22,8 @@ presets:
         - Fringe
         - Castle 2009
         - NCIS
-        - 'CSI: Miami'
-        - 'CSI: New York'
+        - CSI Miami
+        - CSI New York
         - Dexter
         - South Park
         - 'CSI'
@@ -34,7 +31,7 @@ presets:
         - Bones
         - Person of Interest
         - Top Gear
-        - "Sherlock"
+        - Sherlock
         - The Following
         - The Killing
         - The Mentalist
@@ -47,6 +44,15 @@ presets:
         - Criminal Minds
         - Doctor Who
         - Cold Case
+
+    regexp:
+      reject:
+        - www.Speed.Cd
+        - www.Torrenting.com
+        - \[PublicHD\]
+
+    content_filter:
+      reject: '*.rar'
 
     transmission:
       host: localhost
@@ -67,13 +73,18 @@ tasks:
   EZRSS:
     rss: http://www.ezrss.it/feed/
     preset: tv
+    priority: 10
   EZRSS2:
     rss: http://feeds.feedburner.com/eztv-rss-atom-feeds?format=xml
     preset: tv
+    priority: 10
   TPB_SERIES:
     rss: http://rss.thepiratebay.se/205
     preset: tv
+    priority: 30
   TPB_SERIES_HD:
     rss: http://rss.thepiratebay.se/208
     preset: tv
-  
+    priority: 20
+
+      

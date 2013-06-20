@@ -1,0 +1,29 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific aliases and functions
+
+alias "l=ls -l"
+alias "la=ls -la"
+alias "emacs=emacs -nw"
+alias "ne=emacs"
+alias "sbl=sublime"
+
+#ssh shortcuts
+
+sd0="ssh sd0.kenrelcoffee.org"
+sd1="ssh sh1.kernelcoffee.org"
+bdx="ssh bordeaux.kernelcofffe.org"
+rpi="ssh rpi.kernelcoffee.org"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/Applications/bin #Add custom bin path
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export PATH
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-QT5_INSTALL_PATH='~/Documents/git_repo/'
+QT5_INSTALL_PATH=~/Documents/git_repo/
 
 su -c '
 yum install -y flex bison gperf libicu-devel libxslt-devel ruby perl-version at-spi2-core-devel libxcb libxcb-devel xcb-util xcb-util-devel xcb-util-*-devel

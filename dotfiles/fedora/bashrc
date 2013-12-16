@@ -12,6 +12,7 @@ alias "la=ls -la"
 alias "emacs=emacs -nw"
 alias "ne=emacs"
 alias "sbl=sublime"
+alias "clearswap=su -c 'swapoff -a && swapon -a'"
 
 #ssh shortcuts
 

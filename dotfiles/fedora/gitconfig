@@ -3,3 +3,6 @@
         diff = auto
         interactive = auto
         status = auto
+[user]
+	name = Alexandre Moore
+	email = alexandre@kernelcoffee.org

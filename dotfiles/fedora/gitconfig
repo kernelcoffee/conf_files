@@ -1,3 +1,5 @@
+[pull]
+	rebase = true
 [color]
         branch = auto
         diff = auto
@@ -5,4 +7,4 @@
         status = auto
 [user]
 	name = Alexandre Moore
-	email = alexandre@kernelcoffee.org
+	email = amoore@ics.com

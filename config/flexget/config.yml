@@ -1,15 +1,75 @@
-presets:
+secrets: secrets.yml
+
+templates:
+  global:
+    transmission:
+      host: localhost
+      port: 9091
+      username: '{{ secrets.transmission.user }}'
+      password: '{{ secrets.transmission.password }}'
+
+    email:
+      active: True
+      template: html
+      from: '{{ secrets.mail.from }}'
+      to: '{{ secrets.mail.to }}'
+      smtp_host: localhost
+      smtp_port: 25
+      smtp_login: False
+
+  movies:
+    imdb:
+      min_score: 5.0
+      min_votes: 5000
+    download: '{{ secrets.path.movies }}'
+
+    transmission:
+      path: '{{ secrets.path.movies }}'
+
+    content_filter:
+      require: "*.mkv"
+
+    regexp:
+      reject:
+        - hindi
+        - german
+        - spanish
+        - YIFY
+      accept:
+        - SPARKS
+        - publicHD
+        - rarbg
+    imdb_required: yes
+    seen_movies: strict
+    content_size:
+      min: 6000
+      max: 26000
+    quality:
+      - 1080p+ bluray remux
+
   tv:
-    exists_series: "/home/shared/share/series/"
+    exists_series: '{{ secrets.path.series }}'
+
+    transmission:
+      path: '{{ secret.path.series }}/{{ series_name|replace(":"," -") }}/Season {{ series_season }}'
+
+    regexp:
+      reject:
+        - www.Speed.Cd
+        - www.Torrenting.com
+
+    content_filter:
+      reject: '*.rar'
+
     series:
       settings:
-        720p:
-          timeframe: 6 hours
-          quality: 720p
+        tvshows:
+          timeframe: 2 hours
+          quality: 1080p
           upgrade: yes
           set:
-            path: "/home/shared/share/series/%(series_name)s/Season %(series_season)s/"
-      720p:
+            path: '{{ secret.path.series }}/{{ series_name|replace(":"," -") }}/Season {{ series_season }}'
+      tvshows:
         - House
         - How I Met Your Mother
         - The Big Bang Theory
@@ -44,47 +104,23 @@ presets:
         - Criminal Minds
         - Doctor Who
         - Cold Case
-
-    regexp:
-      reject:
-        - www.Speed.Cd
-        - www.Torrenting.com
-        - \[PublicHD\]
-
-    content_filter:
-      reject: '*.rar'
-
-    transmission:
-      host: localhost
-      port: 9091
-      username:
-      password:
-      path: "/home/shared/share/series/%(series_name)s/Season %(series_season)s/"
-
-    email:
-      active: True
-      from: 
-      to: 
-      smtp_host: localhost
-      smtp_port: 25
-      smtp_login: False
+        - The Daily Show
+        - Agatha Christies Poirot
+        - suits
 
 tasks:
-  EZRSS:
+  EzRss:
     rss: http://www.ezrss.it/feed/
-    preset: tv
+    template: tv
     priority: 10
-  EZRSS2:
+  EzRsss_FeedBurner:
     rss: http://feeds.feedburner.com/eztv-rss-atom-feeds?format=xml
-    preset: tv
-    priority: 10
-  TPB_SERIES:
-    rss: http://rss.thepiratebay.se/205
-    preset: tv
-    priority: 30
-  TPB_SERIES_HD:
+    template: tv
+    priority: 11
+  TPB_Series_HD:
     rss: http://rss.thepiratebay.se/208
-    preset: tv
+    template: tv
     priority: 20
-
-      
+  TPB_Movies_HD:
+    rss: http://rss.thepiratebay.se/207
+    template: movies

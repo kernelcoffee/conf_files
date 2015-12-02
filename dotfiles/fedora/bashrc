@@ -14,16 +14,5 @@ alias "ne=emacs"
 alias "sbl=sublime"
 alias "clearswap=su -c 'swapoff -a && swapon -a'"
 
-#ssh shortcuts
-
-#sd0="ssh sd0.kenrelcoffee.org"
-sd1="ssh sh1.kernelcoffee.org"
-bdx="ssh bordeaux.kernelcofffe.org"
-rpi="ssh rpi.kernelcoffee.org"
-
 PATH=$PATH:$HOME/Applications/bin #Add custom bin path
 PATH=$PATH:$HOME/.local/bin:$HOME/bin
-
-export PATH
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"

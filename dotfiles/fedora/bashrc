@@ -14,6 +14,7 @@ alias "ne=emacs"
 alias "sbl=sublime"
 alias "clearswap=su -c 'swapoff -a && swapon -a'"
 alias "gm_setenv"="source /home/greys/Documents/genymobile/misc/gm_set_env.sh"
+alias "mountfreenas=sshfs freenas.local:/mnt/vol1 ~/mnt/freenas"
 
 PATH=$PATH:$HOME/Applications/bin #Add custom bin path
 PATH=$PATH:$HOME/.local/bin:$HOME/bin

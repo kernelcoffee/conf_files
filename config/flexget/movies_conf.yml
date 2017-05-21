@@ -1,0 +1,5 @@
+imdb:
+  min_score: 7.0
+  min_votes: 5000
+seen_movies: strict
+magnets: yes

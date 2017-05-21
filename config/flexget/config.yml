@@ -1,126 +1,73 @@
-secrets: secrets.yml
+variables: secrets.yml
 
 templates:
   global:
+    include: global.yml
+
     transmission:
       host: localhost
       port: 9091
-      username: '{{ secrets.transmission.user }}'
-      password: '{{ secrets.transmission.password }}'
+      username: '{? transmission.user ?}'
+      password: '{? transmission.password ?}'
 
-    email:
-      active: True
-      template: html
-      from: '{{ secrets.mail.from }}'
-      to: '{{ secrets.mail.to }}'
-      smtp_host: localhost
-      smtp_port: 25
-      smtp_login: False
-
-  movies:
-    imdb:
-      min_score: 5.0
-      min_votes: 5000
-    download: '{{ secrets.path.movies }}'
-
-    transmission:
-      path: '{{ secrets.path.movies }}'
-
-    content_filter:
-      require: "*.mkv"
-
-    regexp:
-      reject:
-        - hindi
-        - german
-        - spanish
-        - YIFY
-      accept:
-        - SPARKS
-        - publicHD
-        - rarbg
-    imdb_required: yes
-    seen_movies: strict
-    content_size:
-      min: 6000
-      max: 26000
-    quality:
-      - 1080p+ bluray remux
+    notify:
+      task:
+        template: default
+        via:
+          - email:
+              from: '{? mail.from ?}'
+              to: '{? mail.to ?}'
+              smtp_host: localhost
+              smtp_port: 25
 
   tv:
-    exists_series: '{{ secrets.path.series }}'
+    urlrewrite:
+      sitename:
+        regexp: 'http:\/\/torcache\.net\/torrent\/(?P<id>.*)\.torrent\?title=(?P<title>.*)'
+        format: 'http://torcache.net/torrent/\g<id>.torrent'
+
+    headers:
+      User-Agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36"
+      Referer: "http://torcache.net/"
+      Accept-Encoding: "deflate, gzip"
+
+    magnets: yes
+    thetvdb_lookup: yes
 
     transmission:
-      path: '{{ secret.path.series }}/{{ series_name|replace(":"," -") }}/Season {{ series_season }}'
+      path: '/home/shared/series/{{ series_name|replace(":"," -") }}/Season {{ series_season }}'
 
-    regexp:
-      reject:
-        - www.Speed.Cd
-        - www.Torrenting.com
+    exists_series:
+      - '{? path.series ?}'
 
-    content_filter:
-      reject: '*.rar'
+  movies:
+    include: movies_conf.yml
 
-    series:
-      settings:
-        tvshows:
-          timeframe: 2 hours
-          quality: 1080p
-          upgrade: yes
-          set:
-            path: '{{ secret.path.series }}/{{ series_name|replace(":"," -") }}/Season {{ series_season }}'
-      tvshows:
-        - House
-        - How I Met Your Mother
-        - The Big Bang Theory
-        - Downton Abbey
-        - Game of Thrones
-        - Lie to Me
-        - Star Trek
-        - Leverage
-        - Stargate
-        - Fringe
-        - Castle 2009
-        - NCIS
-        - CSI Miami
-        - CSI New York
-        - Dexter
-        - South Park
-        - 'CSI'
-        - Supernatural
-        - Bones
-        - Person of Interest
-        - Top Gear
-        - Sherlock
-        - The Following
-        - The Killing
-        - The Mentalist
-        - Futurama
-        - Chuck
-        - Life
-        - Eureka
-        - The Walking Dead
-        - Arrow
-        - Criminal Minds
-        - Doctor Who
-        - Cold Case
-        - The Daily Show
-        - Agatha Christies Poirot
-        - suits
+    transmission:
+      path: '{? path.movies ?}'
+    download: '{? path.movies ?}'
 
 tasks:
-  EzRss:
-    rss: http://www.ezrss.it/feed/
-    template: tv
-    priority: 10
-  EzRsss_FeedBurner:
-    rss: http://feeds.feedburner.com/eztv-rss-atom-feeds?format=xml
-    template: tv
-    priority: 11
-  TPB_Series_HD:
-    rss: http://rss.thepiratebay.se/208
-    template: tv
-    priority: 20
-  TPB_Movies_HD:
-    rss: http://rss.thepiratebay.se/207
-    template: movies
+  TV_Shows:
+    inputs:
+      - rss: '{? input.series ?}'
+    include: series.yml
+    template:
+      - tv
+
+  Movies_2160p:
+    priority: 1
+    inputs:
+      - rss: '{? input.movies ?}'
+    template:
+      - movies
+    quality: 2160p+
+
+  Movies_1080p:
+    priority: 2
+    inputs:
+      - rss: '{? input.movies ?}'
+    template:
+      - movies
+    quality: 1080p+
+    delay: 5 hours

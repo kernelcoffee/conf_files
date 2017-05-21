@@ -1,0 +1,13 @@
+urlrewrite:
+  sitename:
+    regexp: 'http:\/\/torcache\.net\/torrent\/(?P<id>.*)\.torrent\?title=(?P<title>.*)'
+    Format: 'http://torcache.net/torrent/\g<id>.torrent'
+
+headers:
+  User-Agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36"
+  Referer: "http://torcache.net/"
+  Accept-Encoding: "deflate, gzip"
+
+# Look up info on TheTVDB.com to fill in extra info
+magnets: yes
+thetvdb_lookup: yes

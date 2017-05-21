@@ -1,0 +1,79 @@
+# Make sure there's 50GB free before adding more downloads
+free_space:
+  path: /home/shared
+  space: 50000
+
+# Most of these are the results of problem torrents I kept seeing still pop up, so I wholesale blocked them
+# RegExr (http://www.gskinner.com/RegExr/) is a great tool for testing regexes
+regexp:
+  reject:
+    - (s|d)ub(s|bed)?\b: {from: title}                                               # Block any subbed/dubbed/etc videos
+    - \b(duo|tri|quadri|tetra|penta)logy\b: {from: title}                            # Block series, only accept one at a time
+    - \b3-?D\b: {from: title}                                                        # I don't have any 3D displays
+    - \btrailer\b: {from: title}                                                     # I've gotten a few trailers that matched as movies. VERY annoying
+    - \bR5\b: {from: title}                                                          # The following are poor quality types that somehow got through the quality
+    - \bWEBSCR\b: {from: title}                                                      # features usually due to the title including a keyword like "720p" as well
+    - \bscreener\b: {from: title}                                                    # Blocking Screeners
+    - \bTS\b: {from: title}                                                          # Blocking Telesync
+    - \bCam\b: {from: title}                                                         # Blocking Cam
+    - \bRAW\b: {from: title}
+        
+    - \bFRENCH\b|\bVOSTFR\b: {from: title}                                           # Blocking FRENCH language.
+    - \bSPANISH\b|\bESP(A.OL)?\b: {from: title}                                      # Blocking SPANISH/ESPANOL language.
+    - \bIta(lian)?\b: {from: title}                                                  # Blocking ITALIAN language.
+    - \bPolish\b|\bPL\b: {from: title}                                               # Blocking POLISH language.      
+        
+    - \bSeason\b|\bSeizoen\b: {from: title}                                          # Blocking Season Packs
+    - \bS[0-9][0-9]?\b: {from: title}                                                # Blocking " S## " and " S# "
+    - \bSeries\b: {from: title}                                                      # Blocking Series
+    - \bComplete\b: {from: title}                                                    # Blocking Complete
+
+    - \bMovies4plaza\b: {from: title}                                                # Blocking bad release groups.
+    - \bHEVC-PSA\b: {from: title}
+    - \bJBilbo\b: {from: title}
+    - \bSeedbox\b: {from: title}
+    - \bSpeed.Cd\b: {from: title}                                                    
+    - \bLektor.PL\b: {from: title}
+    - \bPawulon\b: {from: title}
+    - \bwww.Torrenting.com\b: {from: title}
+    - \bTorrenting\b: {from: title}
+    - \bHEVCMovieTeam\b: {from: title}
+        
+urlrewrite:
+  sitename:
+    regexp: 'http:\/\/torcache\.net\/torrent\/(?P<id>.*)\.torrent\?title=(?P<title>.*)'
+    format: 'http://torcache.net/torrent/\g<id>.torrent'
+
+headers:
+  User-Agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36"
+  Referer: "http://torcache.net/"
+  Accept-Encoding: "deflate, gzip"
+        
+#torrent_alive: { min_seeds: 3, reject_for: 10 minutes }
+# Filter by filenames. Allow multiple video types and rar packs (but note if there is just a
+# single .rar file it won't be accepted)
+content_filter:
+  require:
+    - '*.avi'
+    - '*.mkv'
+    - '*.mp4'
+  reject:
+    - '*.wmv'
+    - '*.rar'
+    - '*.r00'
+    - '*.r01'
+    - 'password.txt'
+  require_mainfile: yes
+      
+# Limit the frequency of requests to domains so they don't complain about using a bot
+domain_delay:
+  bt-chat.com: 60 seconds
+  torrentz.eu: 60 seconds
+  showrss.info: 60 seconds
+  ezrss.it: 60 seconds
+  kickass.to: 60 seconds
+  kat.cr: 15 seconds
+  extratorrent.cc: 60 seconds
+  feedburner.com: 60 seconds
+  torcache.net: 15 seconds
+  demonoid.pw: 15 seconds

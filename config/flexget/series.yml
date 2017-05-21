@@ -1,0 +1,20 @@
+series:
+  settings:
+    shows:
+      timeframe: 3 hours
+      qualities:
+        - 1080p+
+        - 2160p+
+      upgrade: yes
+  shows:
+    - The Linux Action Show
+    - Me My Life My Distro
+    - 2 and a half developpers
+    - Linux is the new Windows
+    - Kernel & Order
+    - Designated Compiler
+    - Engineer Horror Stories
+    - Falling Tickets
+    - Game of Distros
+    - The Walking Windows
+    - Once Upon a Dev

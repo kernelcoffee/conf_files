@@ -1,10 +1,23 @@
-[pull]
-	rebase = true
+[user]
+	name = Alexandre Moore
+[core]
+	editor = emacs
 [color]
         branch = auto
         diff = auto
         interactive = auto
         status = auto
-[user]
-	name = Alexandre Moore
+[push]
+	default = current
+[pull]
+	rebase = true
+	default = current
+[pack]
+	windowMemory = 100m
+	SizeLimit = 100m
+	threads = 2
 
+[alias]
+	unstage = reset HEAD
+	uncommit = reset --soft HEAD^
+	set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`

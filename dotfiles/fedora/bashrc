@@ -5,24 +5,37 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
 # User specific aliases and functions
 
 alias "l=ls -l"
 alias "la=ls -la"
 alias "emacs=emacs -nw"
 alias "ne=emacs"
-alias "sbl=sublime"
+alias "rm=rm -i"
 alias "clearswap=su -c 'swapoff -a && swapon -a'"
 alias "mountfreenas=sshfs freenas.local:/mnt/vol1 ~/mnt/freenas"
+alias "mountkernelcoffee=sshfs kernelcoffee.org:/home/ ~/mnt/kernelcoffee"
+alias "sshtunnel=ssh -qfN -L 3118:localhost:3118 kernelcoffee.org"
+alias "activate=source env/bin/activate"
 
-PATH=$PATH:$HOME/Applications/bin #Add custom bin path
-PATH=$PATH:$HOME/.local/bin:$HOME/bin
-
+export GENYMOTION_HOME=$HOME/Work/genymobile/build-soft-Desktop_Qt_5_9_1_GCC_64bit-Debug/dist
+export GENYMOTION_INSTALLATION_PATH=$HOME/Work/genymobile/QA/MOTION-1508/genymotion
+export PATH=$PATH:$HOME/Applications/bin
 export PATH="$HOME/.rbenv/bin:$PATH"
 export ANDROID_HOME=$HOME/Sdk/Android/sdk
-export JAVA_HOME="/etc/alternatives/java_sdk"
+export JAVA_HOME=/etc/alternatives/jre
 export LC_ALL=en_US.UTF-8
 
-if [ -d "$HOME/.rbenv" ]; then
-   eval "$(rbenv init -)"
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

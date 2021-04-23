@@ -1,0 +1,30 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific aliases and functions
+
+alias "l=ls -l"
+alias "la=ls -la"
+alias "emacs=emacs -nw"
+alias "ne=emacs"
+alias "sbl=sublime"
+alias "clearswap=su -c 'swapoff -a && swapon -a'"
+alias "mountfreenas=sshfs 10.0.0.50:/mnt/tank ~/mnt/freenas"
+alias "sshtunnel=ssh -qfN -L 3118:localhost:3118 kernelcoffee.org"
+alias "activate=source env/bin/activate"
+alias "stripe-cli=podman run --rm -it stripe/stripe-cli"
+alias "ansible_clear_facts=rm -rvf /usr/tmp/ansible/facts/"
+PATH=$PATH:$HOME/Applications/bin #Add custom bin path
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export ANDROID_HOME=$HOME/Sdk/Android/sdk
+export JAVA_HOME="/etc/alternatives/java_sdk"
+export LC_ALL=en_US.UTF-8
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

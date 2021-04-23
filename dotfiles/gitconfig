@@ -21,3 +21,6 @@
 	unstage = reset HEAD
 	uncommit = reset --soft HEAD^
 	set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+
+[branch "master"]
+	pushRemote = no_push
